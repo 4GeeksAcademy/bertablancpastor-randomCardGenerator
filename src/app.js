@@ -22,13 +22,12 @@ const numbers = [
 ];
 
 const palos = ["♦", "♥", "♠", "♣"];
-let figura = palos[randomNum(palos)];
 
 const num = document.querySelector("#number");
-const fig1 = document.querySelectorAll("#palo")[0];
-const fig2 = document.querySelectorAll("#palo")[1];
+const palo1 = document.querySelectorAll("#palo")[0];
+const palo2 = document.querySelectorAll("#palo")[1];
 
-const button = document.querySelector("#newCard");
+const generateNewCardButton = document.querySelector("#generateNewCard");
 
 function randomNum(array) {
   return Math.floor(Math.random() * array.length);
@@ -36,40 +35,41 @@ function randomNum(array) {
 
 window.onload = function() {
   //write your code here
-  if (!fig1.classList.contains("red") || !fig1.classList.contains("black")) {
-    if (figura === "♦" || figura === "♥") {
-      fig1.classList.add("red");
-      fig2.classList.add("red");
-      num.classList.add("red");
-    } else {
-      fig1.classList.add("black");
-      fig2.classList.add("black");
-      num.classList.add("black");
-    }
-  }
-
   num.innerHTML = numbers[randomNum(numbers)];
-  fig1.innerHTML = figura;
-  fig2.innerHTML = figura;
+  let palo = palos[randomNum(palos)];
+  palo1.innerHTML = palo;
+  palo2.innerHTML = palo;
+
+  // if (!palo1.classList.contains("red") || !palo1.classList.contains("black")) {
+  if (palo === "♦" || palo === "♥") {
+    palo1.classList.add("red");
+    palo2.classList.add("red");
+    num.classList.add("red");
+  } else {
+    palo1.classList.add("black");
+    palo2.classList.add("black");
+    num.classList.add("black");
+  }
+  // }
 };
 
 function onClick() {
   num.innerHTML = numbers[randomNum(numbers)];
-  fig1.innerHTML = palos[randomNum(palos)];
-  fig2.innerHTML = fig1.innerHTML;
+  palo1.innerHTML = palos[randomNum(palos)];
+  palo2.innerHTML = palo1.innerHTML;
 
-  if (fig1.innerHTML === "♦" || fig1.innerHTML === "♥") {
-    if (fig1.classList.contains("red")) {
+  if (palo1.innerHTML === "♦" || palo1.innerHTML === "♥") {
+    if (palo1.classList.contains("red")) {
       return;
     }
-    fig1.classList.replace("black", "red");
-    fig2.classList.replace("black", "red");
+    palo1.classList.replace("black", "red");
+    palo2.classList.replace("black", "red");
     num.classList.replace("black", "red");
   } else {
-    fig1.classList.replace("red", "black");
-    fig2.classList.replace("red", "black");
+    palo1.classList.replace("red", "black");
+    palo2.classList.replace("red", "black");
     num.classList.replace("red", "black");
   }
 }
 
-button.addEventListener("click", onClick);
+generateNewCardButton.addEventListener("click", onClick);
